@@ -19,7 +19,7 @@ def format_timestamp(timestamp):
     time_str = datetime_obj.strftime('%H:%M:%S')
     return f"{date_str} {time_str}"
 
-input_path = 'processes/processed_logs/start.log'
+input_path = 'processes/processed_logs/start_again.log'
 output_path = 'processes/processed_logs/start_again_twice.log'
 
 # Read the input file
@@ -38,7 +38,7 @@ with open(output_path, 'w') as output_file:
             formatted_timestamp = format_timestamp(timestamp)
             content = match.group(2)
             if content.startswith("b'"):
-                content = content[3:]
+                content = content[2:]
             content = content.strip()
         else:
             content = line.strip()
