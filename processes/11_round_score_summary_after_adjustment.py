@@ -2,8 +2,8 @@ import pandas as pd
 
 # Create summary dataframes for each round
 
-input_path = 'final-data/remove_break_rounds.csv'
-output_path = 'final-data/round_summary.csv'
+input_path = 'final-data/ignore_suicides.csv'
+output_path = 'final-data/round_summary_adjusted.csv'
 
 # Mapping of player IDs to IP addresses
 player_ip_map = {
@@ -52,8 +52,5 @@ summary_df = pd.DataFrame(summary_data)
 
 # Save the summary DataFrame to a new CSV file
 summary_df.to_csv(output_path, index=False)
-
-# Print the summary DataFrame to the terminal
-print(summary_df)
 
 print(f"Round score summary saved to {output_path}")

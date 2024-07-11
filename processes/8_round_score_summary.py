@@ -53,7 +53,4 @@ summary_df = pd.DataFrame(summary_data)
 # Save the summary DataFrame to a new CSV file
 summary_df.to_csv(output_path, index=False)
 
-# Print the summary DataFrame to the terminal
-print(summary_df)
-
 print(f"Round score summary saved to {output_path}")

@@ -37,7 +37,4 @@ df['points'].fillna(0, inplace=True)
 # Save the filled DataFrame to a new CSV file
 df.to_csv(output_path, index=False)
 
-# Print the filled DataFrame to the terminal
-print(df)
-
 print(f"Filled round score summary saved to {output_path}")

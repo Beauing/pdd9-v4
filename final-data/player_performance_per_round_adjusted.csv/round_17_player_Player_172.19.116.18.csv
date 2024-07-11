@@ -1,0 +1,2 @@
+timestamp,game_round,map,latency,event,killer_id,victim_id,weapon_id,killer_ip,victim_ip,weapon,player_id,score,player_ip,points,log_line,log_score
+2024-05-23 13:17:35,17,wrackdm17,150.0,Kill,6.0,5.0,1.0,Player_172.19.116.18,Player_172.19.117.18,MOD_SHOTGUN,6.0,1065.0,Player_172.19.116.18,1065.0,2024-05-23 13:17:35: \x08 \x08Kill: 6 5 1: Player_172.19.116.18 killed Player_172.19.117.18 by MOD_SHOTGUN\x08 \x08PlayerScore: 6 1: Player_172.19.116.18 now has 1 points,1.0
