@@ -19,7 +19,7 @@ drop = {
     'player_id',
     'log_score'
 }
-df.drop(columns=['{drop}'], inplace=True)
+df.drop(columns=drop, inplace=True)
 
 # Adding the new columns with initial values set to 0
 df['suicide_count'] = 0
