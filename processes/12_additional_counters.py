@@ -9,13 +9,16 @@ output_path = 'final-data/player_performance.csv'
 # Load the input CSV file
 df = pd.read_csv(input_path)
 
-# Drop the 'log_line' column
+# Drop the 'log_line' column - for testing
 drop = {
     'log_line',
+    'event',
     'killer_id',
     'victim_id',
     'weapon_id',
     'weapon',
+    'score',
+    'points',
     'player_id',
     'log_score'
 }
@@ -35,7 +38,7 @@ for player in players:
     df[f'killed_Player_{player}'] = 0
 
 # Function to calculate the counts for each round
-def calculate_counts(group):
+def calculate(group):
     suicide_count = 0
 
     # Mark suicides
@@ -43,20 +46,33 @@ def calculate_counts(group):
     
     # Calculate cumulative suicides
     group['suicide_count'] = group.groupby('player_ip')['is_suicide'].cumsum()
-        
-    # Calculate deaths total
-    group['deaths_total'] = group.groupby('victim_ip').cumcount() + 1
     
-    # Update killed_by_Player and killed_Player counters
+    # Check and update killed_Player counters
+    for player in players:  
+        player_ip = f'Player_{player}'
+        killed_mask = group['victim_ip'] == player_ip
+        group[f'killed_Player_{player}'] = killed_mask.cumsum()
+
+    return group
+
+def calculate_killed_by(group):
     for player in players:
         player_ip = f'Player_{player}'
-        group[f'killed_by_Player_{player}'] = (group['killer_ip'] == player_ip).cumsum()
-        group[f'killed_Player_{player}'] = (group['victim_ip'] == player_ip).cumsum()
-    
+
+        killed_by_mask = group['killer_ip'] == player_ip
+        group[f'killed_by_Player_{player}'] = killed_by_mask.cumsum()
+        
+    return group
+
+def calculate_total_deaths(group):
+    # Calculate deaths total
+    group['deaths_total'] = group.groupby('victim_ip').cumcount() + 1
     return group
 
 # Applying the function to each game round
-df = df.groupby('game_round', group_keys=False).apply(calculate_counts)
+df = df.groupby(['game_round', 'player_ip'], group_keys=False).apply(calculate)
+df = df.groupby(['game_round', 'victim_ip'], group_keys=False).apply(calculate_killed_by)
+df = df.groupby('game_round', group_keys=False).apply(calculate_total_deaths)
 
 # Drop the 'is_suicide' column as it's no longer needed
 df.drop(columns=['is_suicide'], inplace=True)
