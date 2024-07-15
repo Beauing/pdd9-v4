@@ -34,5 +34,5 @@ with open(output_path, 'w') as output_file:
             date_str, time_str = format_datetime(timestamp)
             formatted_line = f"{date_str} {time_str}: {parts[1].strip()}"
             output_file.write(formatted_line + '\n')
-        else:
-            print(f"No match: {line.strip()}")
+        # else:
+        #     print(f"No match: {line.strip()}")
