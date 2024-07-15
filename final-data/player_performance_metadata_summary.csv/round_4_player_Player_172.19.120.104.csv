@@ -1,0 +1,8 @@
+timestamp,game_round,map,latency,killer_ip,victim_ip,player_ip,suicide_count,deaths_total,killed_by_Player_172.19.137.208,killed_Player_172.19.137.208,killed_by_Player_172.19.114.48,killed_Player_172.19.114.48,killed_by_Player_172.19.119.51,killed_Player_172.19.119.51,killed_by_Player_172.19.116.18,killed_Player_172.19.116.18,killed_by_Player_172.19.120.104,killed_Player_172.19.120.104,killed_by_Player_172.19.117.18,killed_Player_172.19.117.18
+2024-05-23 12:00:17,4,wrackdm17,0.0,Player_172.19.120.104,Player_172.19.117.18,Player_172.19.120.104,0,2,1,0,0,0,0,0,0,0,1,0,0,1
+2024-05-23 12:00:46,4,wrackdm17,0.0,Player_172.19.120.104,Player_172.19.116.18,Player_172.19.120.104,0,6,0,0,4,0,0,0,0,1,1,0,0,1
+2024-05-23 12:00:51,4,wrackdm17,0.0,Player_172.19.120.104,Player_172.19.119.51,Player_172.19.120.104,0,5,0,0,1,0,0,1,0,1,1,0,1,1
+2024-05-23 12:01:17,4,wrackdm17,0.0,<world>,Player_172.19.120.104,Player_172.19.120.104,0,5,2,0,0,0,0,1,1,1,0,1,0,1
+2024-05-23 12:02:40,4,wrackdm17,0.0,Player_172.19.120.104,Player_172.19.116.18,Player_172.19.120.104,0,11,2,0,5,0,0,1,0,2,2,1,0,1
+2024-05-23 12:02:47,4,wrackdm17,0.0,Player_172.19.120.104,Player_172.19.116.18,Player_172.19.120.104,0,12,2,0,5,0,0,1,0,3,3,1,0,1
+2024-05-23 12:03:37,4,wrackdm17,0.0,Player_172.19.120.104,Player_172.19.119.51,Player_172.19.120.104,0,12,4,0,2,0,0,2,0,3,2,1,1,1

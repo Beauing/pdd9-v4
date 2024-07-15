@@ -1,0 +1,7 @@
+timestamp,game_round,map,latency,killer_ip,victim_ip,player_ip,suicide_count,deaths_total,killed_by_Player_172.19.137.208,killed_Player_172.19.137.208,killed_by_Player_172.19.114.48,killed_Player_172.19.114.48,killed_by_Player_172.19.119.51,killed_Player_172.19.119.51,killed_by_Player_172.19.116.18,killed_Player_172.19.116.18,killed_by_Player_172.19.120.104,killed_Player_172.19.120.104,killed_by_Player_172.19.117.18,killed_Player_172.19.117.18
+2024-05-23 11:44:22,1,aggressor,0.0,Player_172.19.120.104,Player_172.19.137.208,Player_172.19.120.104,0,2,0,1,0,0,1,0,0,0,1,0,0,0
+2024-05-23 11:45:01,1,aggressor,0.0,Player_172.19.120.104,Player_172.19.116.18,Player_172.19.120.104,0,5,2,1,0,0,2,0,0,1,1,0,0,0
+2024-05-23 11:45:47,1,aggressor,0.0,Player_172.19.120.104,Player_172.19.116.18,Player_172.19.120.104,0,9,3,1,1,0,2,0,1,2,2,0,0,0
+2024-05-23 11:47:47,1,aggressor,0.0,Player_172.19.120.104,Player_172.19.119.51,Player_172.19.120.104,0,13,3,1,3,0,0,1,0,2,1,0,6,0
+2024-05-23 11:48:28,1,aggressor,0.0,Player_172.19.120.104,Player_172.19.117.18,Player_172.19.120.104,0,9,1,1,5,0,1,1,0,2,1,0,1,1
+2024-05-23 11:48:30,1,aggressor,0.0,Player_172.19.120.104,Player_172.19.119.51,Player_172.19.120.104,0,14,3,1,3,0,0,2,0,2,2,0,6,1
