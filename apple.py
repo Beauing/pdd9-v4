@@ -85,7 +85,7 @@ def main():
             # Create a bar chart for the round scoreboard
             fig, ax = plt.subplots()
             player_pts.plot(kind='bar', x='game_round', y='score', ax=ax, legend=False)
-            ax.set_xlabel('Player IP')
+            ax.set_xlabel('Game Round')
             ax.set_ylabel('Score')
             ax.set_title(f'Points Earned Per Round by {option_points}')
             st.pyplot(fig)
@@ -106,7 +106,7 @@ def main():
             # Create a bar chart for the round scoreboard
             fig, ax = plt.subplots()
             player_deaths.plot(kind='bar', x='game_round', y='score', ax=ax, legend=False)
-            ax.set_xlabel('Player IP')
+            ax.set_xlabel('Game Round')
             ax.set_ylabel('Score')
             ax.set_title(f'Number of times {option_deaths} has been killed')
             st.pyplot(fig)
