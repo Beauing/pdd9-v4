@@ -18,7 +18,7 @@ def main():
     with st.sidebar:
         st.info("Overview")
         
-        st.subheader("Filters")
+        st.subheader("Filter and Compare")
         filter_options = ["", "Map", "Latency", "Player Points", "Player Death Count", "Player Performance", "Round Scoreboard"]
         filter_select = st.selectbox("Select a filter", filter_options, key='filter_select')
 
