@@ -22,6 +22,8 @@ st.write("Filter and compare across all available variables.")
 
 col1, col2, col3, col4 = st.columns(4)
 
+selected_attributes = ['', '', '', '']
+
 with col1:
     selected_maps = st.multiselect("Select map/s:", select_maps)
 

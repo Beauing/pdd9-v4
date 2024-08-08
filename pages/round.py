@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
+
+def draw_bar(file_path, player_option):
+    return "Hllow"
+
 def main():
     st.title("Round Scoreboard")
     
@@ -14,7 +18,7 @@ def main():
     select_latency.sort()
     select_round = df['game_round'].unique()
     
-    option_round = st.selectbox("Select a Round", [""] + list(select_round), key='round_select')
+    option_round = st.selectbox("Select a Round", [""] + list(select_round), key='round_select', index=1)
     
     round_scoreboard = sb[sb['game_round'] == int(option_round)]
     map_name = round_scoreboard['map'].iloc[0] if not round_scoreboard.empty else "N/A"
@@ -40,6 +44,8 @@ def main():
     # Sort the table by score in descending order and display it
     round_scoreboard_sorted = round_scoreboard.sort_values(by='score', ascending=False)
     st.write(round_scoreboard_sorted)
+    
+
     
     
 main()

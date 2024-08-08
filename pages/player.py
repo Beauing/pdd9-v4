@@ -16,7 +16,7 @@ def main():
     select_player = df['player_ip'].unique()
     select_round = df['game_round'].unique()
     
-    option_player = st.selectbox("Select a Player", [""] + list(select_player))
+    option_player = st.selectbox("Select a Player", [""] + list(select_player), index=1)
     
     col1, col2 = st.columns(2)
     

@@ -1,6 +1,19 @@
 import streamlit as st
+from PIL import Image
 
 def welcome_page():
+    # Create two columns for the logos
+    col1, col2 = st.columns(2)
+
+    # Load and display the logos
+    with col1:
+        logo1 = Image.open('Images/NBN.png')
+        st.image(logo1, use_column_width=True)
+
+    with col2:
+        logo2 = Image.open('Images/UTS.png')
+        st.image(logo2, use_column_width=True)
+
     st.title("Welcome to the Quake 3 Analysis Dashboard")
     
     st.markdown("""
@@ -26,5 +39,9 @@ def welcome_page():
     """)
     
     st.info("Use the sidebar to explore these sections and start analysing your data!")
+    
+    st.subheader("Data conversion, data analysis and UI diagram")
+    image = Image.open('Images/DataUI.png')
+    st.image(image, caption='Data Conversion Flow')
 
 welcome_page()

@@ -29,7 +29,7 @@ def main():
     
     # Display column selection and pie charts
     df = pd.read_csv(csv_file)
-    columns_to_plot = st.multiselect('Select Columns to Plot', df.columns)
+    columns_to_plot = st.multiselect('Select Columns to Plot', df.columns, default="What platforms do you use to play games? (e.g., PC, console, mobile)")
     
     if columns_to_plot:
         for column in columns_to_plot:

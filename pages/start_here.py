@@ -21,8 +21,8 @@ def display_temporary_message(message, type='info', duration=5):
     placeholder.empty()
     
 # Initialize session state variables
-if 'file_uploaded' not in st.session_state:
-    st.session_state.file_uploaded = False
+if 'files_uploaded' not in st.session_state:
+    st.session_state.files_uploaded = False
 if 'operation_completed' not in st.session_state:
     st.session_state.operation_completed = False
 if 'import_button_clicked' not in st.session_state:
@@ -30,27 +30,37 @@ if 'import_button_clicked' not in st.session_state:
 
 # Set paths
 run_script = "run_all.py"
-input_file_path = "processes/1_start.py"
+log_file_path = ""
+demographic_file_path = ""
 
-if not st.session_state.file_uploaded:
-    # Import button
-    uploaded_file = st.file_uploader("Import File")
+if not st.session_state.files_uploaded:
+    # File uploaders
+    uploaded_log_file = st.file_uploader("Import Log File", type=["log", "txt"])
+    uploaded_demographic_file = st.file_uploader("Import Demographic CSV File", type=["csv"])
 
-    # Save the uploaded file and set the input path for the first script
-    if uploaded_file:
-        input_file_name = uploaded_file.name
-        input_file_path = os.path.join("import", input_file_name)
+    # Save the uploaded files and set the input paths
+    if uploaded_log_file and uploaded_demographic_file:
+        log_file_name = uploaded_log_file.name
+        demographic_file_name = uploaded_demographic_file.name
+        
+        log_file_path = os.path.join("import", log_file_name)
+        demographic_file_path = os.path.join("survey-data", demographic_file_name)
         
         os.makedirs("import", exist_ok=True)
-        with open(input_file_path, "wb") as f:
-            f.write(uploaded_file.getbuffer())
+        os.makedirs("survey-data", exist_ok=True)
+
+        with open(log_file_path, "wb") as f:
+            f.write(uploaded_log_file.getbuffer())
         
-        st.session_state.file_uploaded = True
+        with open(demographic_file_path, "wb") as f:
+            f.write(uploaded_demographic_file.getbuffer())
+        
+        st.session_state.files_uploaded = True
 
-# Check if a file has been uploaded
-file_uploaded = st.session_state.file_uploaded
+# Check if files have been uploaded
+files_uploaded = st.session_state.files_uploaded
 
-if file_uploaded and not st.session_state.operation_completed:
+if files_uploaded and not st.session_state.operation_completed:
     if not st.session_state.import_button_clicked:
         if st.button("Import"):
             st.session_state.import_button_clicked = True
@@ -59,7 +69,7 @@ if file_uploaded and not st.session_state.operation_completed:
             with open("processes/1_start.py", "r") as file:
                 script_content = file.read()
 
-            script_content = script_content.replace("input_path = ''", f"input_path = '{input_file_path}'")
+            script_content = script_content.replace("log_file_path = ''", f"log_file_path = '{log_file_path}'")
 
             with open("processes/1_start.py", "w") as file:
                 file.write(script_content)
@@ -82,13 +92,10 @@ if file_uploaded and not st.session_state.operation_completed:
             if result.returncode != 0:
                 st.error(f"Error running {run_script}: {result.stderr}")
             else:
-                # display_temporary_message(f"{run_script} completed successfully.", 'success', duration=3)
-                # st.text(result.stdout)
-                
                 st.session_state.operation_completed = True
                                 
-                if st.button("Upload a new file"):
-                    st.session_state.file_uploaded = False
+                if st.button("Upload new files"):
+                    st.session_state.files_uploaded = False
                     st.session_state.operation_completed = False
                     st.session_state.import_button_clicked = False
                     st.experimental_rerun()
