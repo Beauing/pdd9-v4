@@ -6,6 +6,9 @@ pages = {
         st.Page("pages/start_here.py", title="Start Here", icon=":material/start:"),
         st.Page("pages/dashboard.py", title="Dashboard", icon=":material/dashboard:"),
     ],
+    "Demographic": [
+        st.Page("pages/demographics.py", title="Participant Analysis", icon=":material/demography:"),  
+    ],
     "Reports": [
         st.Page("pages/player.py", title="Player Performance", icon=":material/person:"),
         st.Page("pages/round.py", title="Round Scoreboard", icon=":material/grid_on:"),
