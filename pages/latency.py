@@ -1,72 +1,98 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.graph_objects as go
 
-df = pd.read_csv('final-data/round_summary_adjusted.csv')
+st.set_page_config(page_title="Latency Analysis", page_icon="📊", layout="wide")
 
-st.set_option('deprecation.showPyplotGlobalUse', False)
+@st.cache_data
+def load_data():
+    try:
+        return pd.read_csv('final-data/round_summary_adjusted.csv')
+    except Exception as e:
+        st.error(f"Error loading the data: {str(e)}")
+        return None
 
-# Function to generate statistical summary and graphs
-def generate_statistics(df):
-    # Group by latency
-    grouped = df.groupby('latency')
-    
-    # Dictionary to store results
-    result_dfs = {}
+df = load_data()
 
-    for latency, group in grouped:
-        # Initialize dataframe with unique player_ips as index
-        unique_player_ips = group['player_ip'].unique()
-        latency_df = pd.DataFrame(index=unique_player_ips)
+if df is not None:
+    def generate_statistics(df):
+        grouped = df.groupby('latency')
+        result_dfs = {}
         
-        # Filter group to include only rows with the current latency value
-        group = group[group['latency'] == latency]
+        for latency, group in grouped:
+            unique_player_ips = group['player_ip'].unique()
+            latency_df = pd.DataFrame(index=unique_player_ips)
+            
+            group = group[group['latency'] == latency]
+            
+            for game_round in group['game_round'].unique():
+                round_scores = group[group['game_round'] == game_round].set_index('player_ip')['score'].rename(f'Round_{game_round}')
+                latency_df = latency_df.join(round_scores, how='left')
+            
+            latency_df['Mean'] = latency_df.mean(axis=1)
+            latency_df['StdDev'] = latency_df.std(axis=1)
+            
+            if 0 in result_dfs:
+                latency_df['mean_difference'] = latency_df['Mean'] - result_dfs[0]['Mean']
+            else:
+                latency_df['mean_difference'] = 0
+            
+            result_dfs[latency] = latency_df
         
-        for game_round in group['game_round'].unique():
-            # Filter group for the current game_round and player_ip
-            round_scores = group[group['game_round'] == game_round].set_index('player_ip')['score'].rename(f'Round_{game_round}')
-            latency_df = latency_df.join(round_scores, how='left')
-        
-        # Calculate mean and standard deviation for each player_ip
-        latency_df['Mean'] = latency_df.mean(axis=1)
-        latency_df['StdDev'] = latency_df.std(axis=1)
-        
-        # Calculate mean difference relative to latency 0 (assuming latency 0 exists in the original data)
-        if 0 in result_dfs:
-            latency_df['mean_difference'] = latency_df['Mean'] - result_dfs[0]['Mean']
-        else:
-            latency_df['mean_difference'] = 0  # or handle appropriately if latency 0 doesn't exist
-        
-        # Store latency_df in result_dfs
-        result_dfs[latency] = latency_df
-    
-    return result_dfs
+        return result_dfs
 
-# Generate statistics
-result_dfs = generate_statistics(df)
+    result_dfs = generate_statistics(df)
 
-# Streamlit app
-def main():
     st.title('Players\' Mean Scores vs Latency Statistical Analysis')
 
-    # Select latency value
     latency_values = list(result_dfs.keys())
-    selected_latency = st.selectbox('Select Latency Value (ms)', latency_values, index=1)
+    selected_latency = st.selectbox('Select Latency Value (ms)', latency_values, index=0)
 
-    # Display selected dataframe
     st.subheader(f'Statistics for Latency {selected_latency}')
-    st.write(result_dfs[selected_latency])
+    st.dataframe(result_dfs[selected_latency])
 
-    # Line graph to show mean scores vs latency for each player_ip
-    plt.figure(figsize=(12, 8))
+    # Create an interactive line plot
+    fig = go.Figure()
+
     for player_ip in df['player_ip'].unique():
         means = [result_dfs[latency].loc[player_ip, 'Mean'] for latency in result_dfs.keys() if player_ip in result_dfs[latency].index]
-        plt.plot(list(result_dfs.keys()), means, marker='o', label=f'Player {player_ip}')
-    plt.xticks(list(result_dfs.keys()))
-    plt.xlabel('Latency')
-    plt.ylabel('Mean Score')
-    plt.title('Players\' Mean Scores vs Latency')
-    plt.legend()
-    st.pyplot()
+        fig.add_trace(go.Scatter(x=list(result_dfs.keys()), y=means, mode='lines+markers', name=f'Player {player_ip}'))
 
-main()
+    fig.update_layout(
+        title={
+            'text': 'Players\' Mean Scores vs Latency',
+            'y':0.98,
+            'x':0.5,
+            'xanchor': 'center',
+            'yanchor': 'top',
+            'font': {'size': 20}
+        },
+        xaxis_title='Latency',
+        yaxis_title='Mean Score',
+        height=650,  # Slightly reduced height
+        legend=dict(
+            orientation="h",
+            yanchor="bottom",
+            y=1.02,
+            xanchor="center",
+            x=0.5,
+            font=dict(size=10)  # Reduced font size for legend
+        ),
+        margin=dict(t=100)  # Increased top margin to accommodate centered legend
+    )
+
+    st.plotly_chart(fig, use_container_width=True)
+
+    # Additional information
+    # st.write("Note: This chart shows how each player's mean score changes with different latency values. "
+    #          "Each line represents a player, allowing you to compare performance across latencies.")
+
+else:
+    st.error("Cannot proceed with analysis due to data loading error.")
+
+# Display available columns
+# st.subheader("Available Data Columns")
+# if df is not None:
+#     st.write(f"Columns in the dataset: {', '.join(df.columns)}")
+# else:
+#     st.write("Data not available.")

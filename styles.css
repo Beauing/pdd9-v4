@@ -1,0 +1,12 @@
+.footer {
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--footer-bg-light);
+    color: var(--footer-text-light);
+    text-align: center;
+    padding: 10px;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+}
