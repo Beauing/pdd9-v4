@@ -1,47 +1,74 @@
 import streamlit as st
 from PIL import Image
 
-def welcome_page():
-    # Create two columns for the logos
-    col1, col2 = st.columns(2)
+def landing_page():
+    st.set_page_config(layout="wide", page_title="Quake 3 Analysis Dashboard", page_icon="🎮")
 
-    # Load and display the logos
+    # Custom CSS for minimal styling
+    st.markdown("""
+    <style>
+    .title {
+        font-size: 36px;
+        font-weight: bold;
+        color: black;
+        margin-bottom: 0;
+    }
+    .stButton>button {
+        background-color: #FF4B4B;
+        color: white;
+        border-radius: 5px;
+        padding: 10px 24px;
+        font-size: 18px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # Header with logos
+    col1, col2, col3 = st.columns([4, 1, 1])
+    
     with col1:
-        logo1 = Image.open('Images/NBN.png')
-        st.image(logo1, use_column_width=True)
-
+        st.title("Quake 3 Analysis Dashboard")
+    
     with col2:
+        logo1 = Image.open('Images/NBN.png')
+        st.image(logo1, width=180)
+
+    with col3:
         logo2 = Image.open('Images/UTS.png')
-        st.image(logo2, use_column_width=True)
+        st.image(logo2, width=200)
 
-    st.title("Welcome to the Quake 3 Analysis Dashboard")
-    
-    st.markdown("""
-    This dashboard is designed to help you analyse player performance, game rounds, and other important metrics in a comprehensive way. 
-    Use the sidebar to navigate through different sections and get the insights you need.
-    """)
-    
-    st.subheader("Navigation Guide")
-    
-    st.markdown("""
-    **Home**
-    - **Welcome:** Overview of the dashboard and navigation instructions.
-    - **Dashboard:** A summary view of key metrics and quick insights.
+    c1, c2 = st.columns(2)
 
-    **Reports**
-    - **Player Performance:** Analyse individual player metrics and compare performances.
-    - **Round Scoreboard:** Review and compare scores for each game round.
-    - **Map Analysis:** Understand how different maps impact player performance and game outcomes.
-    - **Latency Analysis:** Examine how latency affects player performance across different rounds.
+    with c1:
+        st.info("💡 New to the dashboard? Check out our [Site Guide](pages/credits.py) page for support.")
+        st.write("This dashboard provides comprehensive insights into player performance, game rounds, and other crucial metrics in Quake 3. Explore different sections using the sidebar to gain valuable insights into your gaming data.")
+        st.markdown("""
+        Our dashboard offers:
+        - 📊 Comprehensive player statistics
+        - 🏆 Detailed round analysis
+        - 🔍 Insightful latency metrics
+        - 🧠 Advanced gaming experiments data
+        """)
+        
+        st.subheader("Participate in Our Research")
+        st.markdown("""
+        We're conducting exciting experiments to further our understanding of gaming performance:
+        
+        - [**UTS Campus Experiments**](pages/utsexperiments.py): Our controlled studies at the UTS.
+        - [**Large Event Experiments**](pages/eventexperiments.py): Larger-scale gaming sessions.        
+        """)
 
-    **Support**
-    - **How to:** Detailed guide on understanding log event components.
-    """)
-    
-    st.info("Use the sidebar to explore these sections and start analysing your data!")
-    
-    st.subheader("Data conversion, data analysis and UI diagram")
-    image = Image.open('Images/DataUI.png')
-    st.image(image, caption='Data Conversion Flow')
+    with c2:
+        st.subheader("How It Works")
+        st.markdown("""
+        1. **Data Input**: Quake 3 game logs and participant surveys are uploaded into our system.
+        2. **Processing**: Our Python backend parses, extracts, and analyses the data.
+        3. **Visualisation**: The processed data is transformed into interactive graphs and charts.
+        4. **User Interaction**: You can access the UI, select filters, and explore the analysed data.
+        """)
 
-welcome_page()
+        if st.button("Get Started Here", key="get_started"):
+            st.switch_page("pages/start_here.py")
+        st.write("*Note: Additional pages will become visible once you've uploaded files.*")
+    
+landing_page()

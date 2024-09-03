@@ -1,6 +1,7 @@
 import streamlit as st
 
 def main():
+    st.title("How to Read the Log File")
     st.header("Log Event Components")
 
     st.subheader("Kill")

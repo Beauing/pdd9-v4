@@ -49,13 +49,7 @@ load_css("styles.css")
 
 st.title("Credits")
 
-st.markdown("""
-<div style="background-color: #f0f2f6; padding: 20px; border-radius: 10px; margin-bottom: 30px;">
-    <p style="font-size: 16px; color: #1f1f1f;">
-        The NBN Network Simulation project represents a collaborative effort between UTS and NBN, combining academic expertise with industry insight. This initiative aims to model and optimise network performance, leveraging advanced algorithms and real-world data. Our team of students, faculty, and industry professionals has worked tirelessly to create innovative solutions for modern networking challenges.
-    </p>
-</div>
-""", unsafe_allow_html=True)
+st.markdown("The NBN Network Simulation project represents a collaborative effort between UTS and NBN, combining academic expertise with industry insight. This initiative aims to model and optimise network performance, leveraging advanced algorithms and real-world data. Our team of students, faculty, and industry professionals has worked tirelessly to create innovative solutions for modern networking challenges.")
 
 st.markdown("""
 <style>

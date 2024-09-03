@@ -1,40 +1,110 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.express as px
+import plotly.graph_objects as go
 
 csv_file = 'survey-data/demographics.csv'
 
-st.set_option('deprecation.showPyplotGlobalUse', False)
+def preprocess_data(df):
+    for column in df.columns:
+        if df[column].dtype == 'object':
+            df[column] = df[column].str.split(',')
+    return df
 
-# Function to plot pie chart for a categorical column
-def plot_pie_chart(column_name):
-    # Read the CSV file into a pandas DataFrame
-    df = pd.read_csv(csv_file)
-    
-    # Count unique values for the column, excluding NaN
-    counts = df[column_name].value_counts(dropna=True)
-    
-    # Plotting the pie chart
-    plt.figure(figsize=(8, 6))
-    counts.plot.pie(autopct='%1.1f%%', startangle=140)
-    plt.title(f'Distribution of {column_name}')
-    plt.ylabel('')  # Remove the default ylabel 'column_name'
-    plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-    st.pyplot()
+def plot_overall_chart(df, column_name):
+    if isinstance(df[column_name].iloc[0], list):
+        # Multiple choice question
+        temp_df = df[column_name].explode()
+        counts = temp_df.value_counts(dropna=True)
+        fig = px.bar(
+            x=counts.index,
+            y=counts.values,
+            title=f'Distribution of {column_name}',
+            labels={'x': 'Response', 'y': 'Count'},
+        )
+    else:
+        # Single choice question
+        counts = df[column_name].value_counts(dropna=True)
+        fig = px.bar(
+            x=counts.index,
+            y=counts.values,
+            title=f'Distribution of {column_name}',
+            labels={'x': 'Response', 'y': 'Count'},
+        )
 
-    # Streamlit app
-def main():
-    st.title('Participant Analysis')
-    st.info('Pie Charts of CSV Columns')
+    fig.update_layout(xaxis_tickangle=-45, height=400, width=600)
     
-    # Display column selection and pie charts
-    df = pd.read_csv(csv_file)
-    columns_to_plot = st.multiselect('Select Columns to Plot', df.columns, default="What platforms do you use to play games? (e.g., PC, console, mobile)")
+    # Calculate percentage for each category
+    total = counts.sum()
+    percentages = (counts / total * 100).round(1)
     
-    if columns_to_plot:
-        for column in columns_to_plot:
-            plot_pie_chart(column)
+    # Add percentage labels on top of each bar
+    for i, (value, percentage) in enumerate(zip(counts, percentages)):
+        fig.add_annotation(
+            x=counts.index[i],
+            y=value,
+            text=f"{percentage}%",
+            showarrow=False,
+            yshift=10
+        )
 
-main()
+    # Determine the Majority
+    dominant_choice = counts.index[0]
+    dominant_percentage = percentages.iloc[0]
 
-#beau's code
+    return fig, dominant_choice, dominant_percentage
+
+def display_individual_summary(df, player_index):
+    st.subheader(f"Player {player_index + 1} Summary")
+    for column in df.columns:
+        value = df.iloc[player_index][column]
+        if isinstance(value, list):
+            value = ', '.join(value)
+        st.write(f"**{column}:** {value}")
+
+@st.cache_data
+def load_data():
+    try:
+        df = pd.read_csv(csv_file)
+        return preprocess_data(df)
+    except FileNotFoundError:
+        st.error(f"File not found: {csv_file}")
+        return None
+    except pd.errors.EmptyDataError:
+        st.error(f"The file {csv_file} is empty.")
+        return None
+    except Exception as e:
+        st.error(f"An error occurred while reading the file: {str(e)}")
+        return None
+
+st.title('Demographic Overview')
+
+df = load_data()
+
+if df is not None:
+    co1, co2 = st.columns(2)
+    with co1:
+        st.write(f"Number of participants: {len(df)}")
+    with co2:
+        st.write(f"Number of questions: {len(df.columns)}")
+    
+    # Add view type selector
+    view_type = st.radio("Select View", ["Overall", "Individual"], horizontal=True)
+    
+    if view_type == "Overall":
+        columns_to_plot = st.multiselect(
+            'Select Questions to Analyze',
+            df.columns,
+            default="What platforms do you use to play games? (e.g., PC, console, mobile)"
+        )
+        
+        if columns_to_plot:
+            for column in columns_to_plot:
+                fig, dominant_choice, dominant_percentage = plot_overall_chart(df, column)
+                st.plotly_chart(fig, use_container_width=True)
+                st.info(f"Most common response: {dominant_choice} ({dominant_percentage:.1f}%)")
+        else:
+            st.warning("Please select at least one question to analyse.")
+    else:  # Individual view
+        player_index = st.selectbox("Select Player", range(len(df)), format_func=lambda x: f"Player {x + 1}")
+        display_individual_summary(df, player_index)
