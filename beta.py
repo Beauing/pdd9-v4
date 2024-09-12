@@ -29,10 +29,10 @@ pages = {
         st.Page("pages/player.py", title="Player Performance", icon=":material/person:"),
         st.Page("pages/round.py", title="Round Scoreboard", icon=":material/grid_on:"),
     ],
-    "Gaming Experiments":[
-        st.Page("pages/utsexperiments.py", title="UTS Campus Experiments", icon=":material/person:"),
-        st.Page("pages/eventexperiments.py", title="Large Event Experiments", icon=":material/person:"),
-    ],
+    # "Gaming Experiments":[
+    #     st.Page("pages/utsexperiments.py", title="UTS Campus Experiments", icon=":material/person:"),
+    #     st.Page("pages/eventexperiments.py", title="Large Event Experiments", icon=":material/person:"),
+    # ],
     "Support": [
         st.Page("pages/navigation.py", title="Site Guide", icon=":material/book:"),
         st.Page("pages/how_to_read_log.py", title="How to", icon=":material/info:"),

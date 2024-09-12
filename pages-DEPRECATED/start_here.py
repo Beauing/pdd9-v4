@@ -24,7 +24,6 @@ demographic_file_path = ""
 st.title("Start Here")
 
 if not st.session_state.files_uploaded:
-    st.header("File Import")
     
     uploaded_log_file = st.file_uploader("Import Log File", type=["log", "txt"])
     uploaded_demographic_file = st.file_uploader("Import Demographic CSV File", type=["csv"])

@@ -1,8 +1,9 @@
 import streamlit as st
 from PIL import Image
 
-def landing_page():
-    st.set_page_config(layout="wide", page_title="Quake 3 Analysis Dashboard", page_icon="🎮")
+st.set_page_config(layout="wide", page_title="Quake 3 Analysis Dashboard", page_icon="🎮")
+
+def show_welcome():
 
     # Custom CSS for minimal styling
     st.markdown("""
@@ -25,10 +26,10 @@ def landing_page():
 
     # Header with logos
     col1, col2, col3 = st.columns([4, 1, 1])
-    
+
     with col1:
         st.title("Quake 3 Analysis Dashboard")
-    
+
     with col2:
         logo1 = Image.open('Images/NBN.png')
         st.image(logo1, width=180)
@@ -40,7 +41,7 @@ def landing_page():
     c1, c2 = st.columns(2)
 
     with c1:
-        st.info("💡 New to the dashboard? Check out our [Site Guide](pages/credits.py) page for support.")
+        st.info("⬅️ New to the dashboard? Check out our Site Guide page for support.")
         st.write("This dashboard provides comprehensive insights into player performance, game rounds, and other crucial metrics in Quake 3. Explore different sections using the sidebar to gain valuable insights into your gaming data.")
         st.markdown("""
         Our dashboard offers:
@@ -50,13 +51,25 @@ def landing_page():
         - 🧠 Advanced gaming experiments data
         """)
         
-        st.subheader("Participate in Our Research")
-        st.markdown("""
-        We're conducting exciting experiments to further our understanding of gaming performance:
+        # st.subheader("Participate in Our Research")
+        # st.write("We're conducting exciting experiments to further our understanding of gaming performance:")
         
-        - [**UTS Campus Experiments**](pages/utsexperiments.py): Our controlled studies at the UTS.
-        - [**Large Event Experiments**](pages/eventexperiments.py): Larger-scale gaming sessions.        
-        """)
+        # but1, but2 = st.columns([2, 5])
+        
+        # with but1:
+        #     if st.button("UTS Campus Experiments", key="uts_experiments"):
+        #         st.switch_page("utsexperiments")    
+        # with but2:
+        #     st.write("Our controlled studies at the UTS.")
+            
+        # but3, but4 = st.columns([2,5])
+        
+        # with but3:
+        #     if st.button("Large Event Experiments", key="scaled_experiments"):
+        #         st.switch_page("eventexperiments.py")
+            
+        # with but4:
+        #     st.write("Larger-scale gaming sessions.")
 
     with c2:
         st.subheader("How It Works")
@@ -68,7 +81,5 @@ def landing_page():
         """)
 
         if st.button("Get Started Here", key="get_started"):
-            st.switch_page("pages/start_here.py")
+            st.switch_page("../start.py")
         st.write("*Note: Additional pages will become visible once you've uploaded files.*")
-    
-landing_page()
