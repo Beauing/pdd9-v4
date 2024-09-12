@@ -1,3 +1,3 @@
-timestamp,game_round,map,latency,event,killer_id,victim_id,weapon_id,killer_ip,victim_ip,weapon,player_id,score,player_ip,points,log_line
-2024-05-23 13:29:04,19,wrackdm17,150.0,Kill,6.0,4.0,3.0,Player_172.19.116.18,Player_172.19.120.104,MOD_MACHINEGUN,6.0,1.0,Player_172.19.116.18,1.0,2024-05-23 13:29:04: \x08 \x08Kill: 6 4 3: Player_172.19.116.18 killed Player_172.19.120.104 by MOD_MACHINEGUN\x08 \x08PlayerScore: 6 1: Player_172.19.116.18 now has 1 points\x08 \x08Challenge: 6 202 1: Client 6 got award 202\x08 \x08Challenge: 6 1 1: Client 6 got award 1\x08 \x08Challenge: 4 2 1: Client 4 got award 2
-2024-05-23 13:29:28,19,wrackdm17,150.0,Kill,1022.0,6.0,22.0,<world>,Player_172.19.116.18,MOD_TRIGGER_HURT,6.0,0.0,Player_172.19.116.18,0.0,2024-05-23 13:29:28: \x08 \x08Kill: 1022 6 22: <world> killed Player_172.19.116.18 by MOD_TRIGGER_HURT\x08 \x08PlayerScore: 6 0: Player_172.19.116.18 now has 0 points
+version https://git-lfs.github.com/spec/v1
+oid sha256:e858d13b02386018cbbfcd617c457ba676031494790f9059241392cee95bb475
+size 911

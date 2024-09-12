@@ -1,3 +1,3 @@
-timestamp,game_round,map,latency,event,killer_id,victim_id,weapon_id,killer_ip,victim_ip,weapon,player_id,score,player_ip,points,log_line
-2024-05-23 11:55:52,3,aggressor,0.0,Kill,4.0,2.0,11.0,Player_172.19.116.18,Player_172.19.114.48,MOD_LIGHTNING,4.0,1.0,Player_172.19.116.18,1.0,2024-05-23 11:55:52: \x08 \x08Kill: 4 2 11: Player_172.19.116.18 killed Player_172.19.114.48 by MOD_LIGHTNING\x08 \x08PlayerScore: 4 1: Player_172.19.116.18 now has 1 points\x08 \x08Challenge: 4 206 1: Client 4 got award 206\x08 \x08Challenge: 4 1 1: Client 4 got award 1\x08 \x08Challenge: 2 2 1: Client 2 got award 2
-2024-05-23 11:58:52,3,aggressor,0.0,Kill,4.0,5.0,11.0,Player_172.19.116.18,Player_172.19.120.104,MOD_LIGHTNING,4.0,2.0,Player_172.19.116.18,2.0,2024-05-23 11:58:52: \x08 \x08Kill: 4 5 11: Player_172.19.116.18 killed Player_172.19.120.104 by MOD_LIGHTNING\x08 \x08PlayerScore: 4 2: Player_172.19.116.18 now has 2 points\x08 \x08Challenge: 4 206 1: Client 4 got award 206\x08 \x08Challenge: 4 1 1: Client 4 got award 1\x08 \x08Challenge: 5 2 1: Client 5 got award 2
+version https://git-lfs.github.com/spec/v1
+oid sha256:b40953f71e13fada150c3e807c51964485b6ab5cb76242a43b2eb474faa03e36
+size 1064

@@ -1,3 +1,3 @@
-timestamp,game_round,map,latency,event,killer_id,victim_id,weapon_id,killer_ip,victim_ip,weapon,player_id,score,player_ip,points,log_line,log_score
-2024-05-23 11:49:38,2,wrackdm17,0.0,Kill,1022.0,6.0,22.0,<world>,Player_172.19.117.18,MOD_TRIGGER_HURT,1022.0,1.0,<world>,1.0,2024-05-23 11:49:38: \x08 \x08Kill: 1022 6 22: <world> killed Player_172.19.117.18 by MOD_TRIGGER_HURT,1.0
-2024-05-23 11:49:46,2,wrackdm17,0.0,Kill,1022.0,6.0,22.0,<world>,Player_172.19.117.18,MOD_TRIGGER_HURT,1022.0,2.0,<world>,2.0,2024-05-23 11:49:46: \x08 \x08Kill: 1022 6 22: <world> killed Player_172.19.117.18 by MOD_TRIGGER_HURT,2.0
+version https://git-lfs.github.com/spec/v1
+oid sha256:541080c637c8f34e15b673be2eea8f314d9bfae8b325c046ca0e26c30c75b61a
+size 614

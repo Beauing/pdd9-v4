@@ -1,8 +1,3 @@
-Name,Gender,Age,"Types of games played [FPS, RPG, MMORPG, etc.]",Hours of gaming per week (0-20+ hrs per week),Level of experience (1-10),"How long have you been playing video games? (e.g., less than 1 year, 1-3 years, 4-6 years, more than 6 years)","How often do you play video games? (e.g., daily, several times a week, once a week, a few times a month)","Do you play games competitively or casually? (e.g., only for fun, in online tournaments, professional gamer, etc.)","What platforms do you use to play games? (e.g., PC, console, mobile)",Have you played first-person shooter game?,"If you play FPS games, what is your preferred style or role?",Have you heard of Quake 3?,"If you have played Quake 3, how often do you play it?",Self rating out of 5 for FPS games?,Self rating out of 5 for Quake 3?
-Sydney,F,22,FPS,5,8,More than 6 years,Several times a week,For fun,PC,Yes,Balanced,No,NA,5,3
-Nathan,M,24,"FPS, MMO",0.5,6,more than 6 years,a few times a month,only for fun,PC and console,Yes,Balanced,Yes,No,2,3
-Erik S,M,19,All,10,8,14 years,Weekends usually,Both,"Console, can do PC",Yes,Aggressive,No,No,3,4
-N/A,N/A,N/A,N/A,0.2,5,more than 6 years,few times a month,only for fun,"PC, console",Yes,Balanced,Yes,No,2,3
-Duc Minh Pham,male,45,FPS,0,1,Play different games before,No game play,For fun,PC,Yes,Balanced,Yes,Once or twice before,1,1
-Damian Sue,male,22,"FPS, RPG, RTS, Visual Novel, Strategy, Puzzle, Survival Horror, Sandbox",20,8,6+ years (17 years),Daily,Casually,"PC, Console, Mobile",Yes,Balanced,Yes,Haven't played before,3,3
-Beau,M,25,FPS/RPG/MMORPG,5,5,6+ years,few times a month,casually,PC/XBOX360/PS2,Yes,Aggressive,Yes,Yes - few times,2.5,3
+version https://git-lfs.github.com/spec/v1
+oid sha256:1335996d822720816425232fc1ff910c786509854ae0f7bd410b8f8800f72af9
+size 1674

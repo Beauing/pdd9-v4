@@ -1,3 +1,3 @@
-timestamp,game_round,map,latency,killer_ip,victim_ip,player_ip,suicide_count,deaths_total,killed_by_Player_172.19.137.208,killed_Player_172.19.137.208,killed_by_Player_172.19.114.48,killed_Player_172.19.114.48,killed_by_Player_172.19.119.51,killed_Player_172.19.119.51,killed_by_Player_172.19.116.18,killed_Player_172.19.116.18,killed_by_Player_172.19.120.104,killed_Player_172.19.120.104,killed_by_Player_172.19.117.18,killed_Player_172.19.117.18
-2024-05-23 13:29:04,19,wrackdm17,150.0,Player_172.19.116.18,Player_172.19.120.104,Player_172.19.116.18,0,7,1,0,3,0,0,0,1,0,0,1,0,0
-2024-05-23 13:29:28,19,wrackdm17,150.0,<world>,Player_172.19.116.18,Player_172.19.116.18,0,13,2,0,4,0,1,0,0,1,2,1,2,0
+version https://git-lfs.github.com/spec/v1
+oid sha256:a229b7726216a044a7b1b6d478d16598bac58d51588e3fb8a0b63c0e521eee67
+size 697

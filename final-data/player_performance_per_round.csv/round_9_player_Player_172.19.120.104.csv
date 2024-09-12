@@ -1,4 +1,3 @@
-timestamp,game_round,map,latency,event,killer_id,victim_id,weapon_id,killer_ip,victim_ip,weapon,player_id,score,player_ip,points,log_line
-2024-05-23 12:30:20,9,wrackdm17,200.0,Kill,6.0,3.0,8.0,Player_172.19.120.104,Player_172.19.119.51,MOD_PLASMA,6.0,1.0,Player_172.19.120.104,1.0,2024-05-23 12:30:20: \x08 \x08Kill: 6 3 8: Player_172.19.120.104 killed Player_172.19.119.51 by MOD_PLASMA\x08 \x08PlayerScore: 6 1: Player_172.19.120.104 now has 1 points\x08 \x08Challenge: 6 207 1: Client 6 got award 207\x08 \x08Challenge: 6 1 1: Client 6 got award 1\x08 \x08Challenge: 3 2 1: Client 3 got award 2
-2024-05-23 12:32:01,9,wrackdm17,200.0,Kill,1022.0,6.0,22.0,<world>,Player_172.19.120.104,MOD_TRIGGER_HURT,6.0,0.0,Player_172.19.120.104,0.0,2024-05-23 12:32:01: \x08 \x08Kill: 1022 6 22: <world> killed Player_172.19.120.104 by MOD_TRIGGER_HURT\x08 \x08PlayerScore: 6 0: Player_172.19.120.104 now has 0 points
-2024-05-23 12:33:10,9,wrackdm17,200.0,Kill,6.0,6.0,7.0,Player_172.19.120.104,Player_172.19.120.104,MOD_ROCKET_SPLASH,6.0,2.0,Player_172.19.120.104,2.0,2024-05-23 12:33:10: \x08 \x08Kill: 6 6 7: Player_172.19.120.104 killed Player_172.19.120.104 by MOD_ROCKET_SPLASH
+version https://git-lfs.github.com/spec/v1
+oid sha256:608e9df06c69128e67a1725b081ab70619a870ba11f80c79f2931c508173c870
+size 1173

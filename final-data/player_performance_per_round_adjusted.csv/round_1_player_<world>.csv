@@ -1,2 +1,3 @@
-timestamp,game_round,map,latency,event,killer_id,victim_id,weapon_id,killer_ip,victim_ip,weapon,player_id,score,player_ip,points,log_line,log_score
-2024-09-05 01:53:14,1,wrackdm17,,Kill,1022.0,0.0,20.0,<world>,Player_138.25.249.38,MOD_SUICIDE,1022.0,1.0,<world>,1.0,2024-09-05 01:53:14: \x08 \x08Kill: 1022 0 20: <world> killed Player_138.25.249.38 by MOD_SUICIDE,1.0
+version https://git-lfs.github.com/spec/v1
+oid sha256:7dd9d8bb18d3a631c2e683becc452b275968c2ee9474093125126462deb6e0ad
+size 368

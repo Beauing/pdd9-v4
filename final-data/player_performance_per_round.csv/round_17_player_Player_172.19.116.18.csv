@@ -1,2 +1,3 @@
-timestamp,game_round,map,latency,event,killer_id,victim_id,weapon_id,killer_ip,victim_ip,weapon,player_id,score,player_ip,points,log_line
-2024-05-23 13:17:35,17,wrackdm17,150.0,Kill,6.0,5.0,1.0,Player_172.19.116.18,Player_172.19.117.18,MOD_SHOTGUN,6.0,1.0,Player_172.19.116.18,1.0,2024-05-23 13:17:35: \x08 \x08Kill: 6 5 1: Player_172.19.116.18 killed Player_172.19.117.18 by MOD_SHOTGUN\x08 \x08PlayerScore: 6 1: Player_172.19.116.18 now has 1 points
+version https://git-lfs.github.com/spec/v1
+oid sha256:d00f746eef4f5cea0f21b2bbbd7e3e8ad99132d6656ab4e617d31c566c99ae81
+size 452

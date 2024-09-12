@@ -1,4 +1,3 @@
-timestamp,game_round,map,latency,event,killer_id,victim_id,weapon_id,killer_ip,victim_ip,weapon,player_id,score,player_ip,points,log_line
-2024-09-05 02:12:35,8,wrackdm17,200.0,Kill,2.0,1.0,7.0,Player_138.25.249.94,Player_138.25.249.38,MOD_ROCKET_SPLASH,2.0,1.0,Player_138.25.249.94,1.0,2024-09-05 02:12:35: \x08 \x08Kill: 2 1 7: Player_138.25.249.94 killed Player_138.25.249.38 by MOD_ROCKET_SPLASH\x08 \x08PlayerScore: 2 1: Player_138.25.249.94 now has 1 points\x08 \x08Challenge: 2 205 1: Client 2 got award 205\x08 \x08Challenge: 2 1 1: Client 2 got award 1\x08 \x08Challenge: 1 2 1: Client 1 got award 2
-2024-09-05 02:12:39,8,wrackdm17,200.0,Kill,2.0,2.0,7.0,Player_138.25.249.94,Player_138.25.249.94,MOD_ROCKET_SPLASH,2.0,0.0,Player_138.25.249.94,0.0,2024-09-05 02:12:39: \x08 \x08Kill: 2 2 7: Player_138.25.249.94 killed Player_138.25.249.94 by MOD_ROCKET_SPLASH\x08 \x08PlayerScore: 2 0: Player_138.25.249.94 now has 0 points
-2024-09-05 02:16:04,8,wrackdm17,200.0,Kill,2.0,3.0,3.0,Player_138.25.249.94,Player_138.25.249.81,MOD_MACHINEGUN,2.0,1.0,Player_138.25.249.94,1.0,2024-09-05 02:16:04: \x08 \x08Kill: 2 3 3: Player_138.25.249.94 killed Player_138.25.249.81 by MOD_MACHINEGUN\x08 \x08PlayerScore: 2 1: Player_138.25.249.94 now has 1 points\x08 \x08Challenge: 2 202 1: Client 2 got award 202\x08 \x08Challenge: 2 1 1: Client 2 got award 1\x08 \x08Challenge: 3 2 1: Client 3 got award 2\x08 \x08Challenge: 2 401 1: Client 2 got award 401
+version https://git-lfs.github.com/spec/v1
+oid sha256:aa27e02045e53266f03619699ec07b9cc29ff7f71803f26fa58b24e3c5962936
+size 1448
