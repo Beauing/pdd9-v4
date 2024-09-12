@@ -15,6 +15,17 @@ def load_player_performance():
         df = pd.read_csv('final-data/player_performance.csv')
         df['timestamp'] = pd.to_datetime(df['timestamp'], errors='coerce')
         df = df.dropna(subset=['timestamp'])  # Remove rows with invalid timestamps
+        
+        # Clean and convert game_round to integer
+        df['game_round'] = pd.to_numeric(df['game_round'], errors='coerce')
+        df = df.dropna(subset=['game_round'])
+        df['game_round'] = df['game_round'].astype(int)
+        
+        # Clean and convert latency to integer
+        df['latency'] = pd.to_numeric(df['latency'], errors='coerce')
+        df = df.dropna(subset=['latency'])
+        df['latency'] = df['latency'].astype(int)
+        
         return df
     except Exception as e:
         st.error(f"Error loading player performance data: {e}")
@@ -47,7 +58,7 @@ def load_event_data(round_number, player_ip):
 # Load player performance data
 player_performance = load_player_performance()
 
-if player_performance is not None:
+if player_performance is not None and not player_performance.empty:
     # Define timezones
     utc = pytz.UTC
     aest = pytz.timezone('Australia/Sydney')
@@ -61,14 +72,27 @@ if player_performance is not None:
     # Convert timestamps for player performance data
     player_performance['timestamp'] = player_performance['timestamp'].apply(to_aest)
 
-    # Get unique round numbers and player IPs
-    round_numbers = sorted(player_performance['game_round'].unique())
+    # Get unique latencies and round numbers with latencies and map names
+    latencies = sorted(player_performance['latency'].unique())
+    round_latencies = player_performance.groupby('game_round').agg({
+        'latency': 'first',
+        'map': 'first'  # Changed from 'map_name' to 'map'
+    }).reset_index()
+    round_latencies['round_label'] = round_latencies.apply(lambda row: f"Round {row['game_round']} - {row['map']} - {row['latency']}ms", axis=1)
+
+    # Get unique player IPs
     player_ips = sorted(pd.concat([player_performance['killer_ip'], player_performance['victim_ip']]).unique())
 
     # User selection
     st.sidebar.header('Filters')
-    selected_rounds = st.sidebar.multiselect('Select Rounds', round_numbers, default=[round_numbers[0]])
-    selected_players = st.sidebar.multiselect('Select Players', player_ips, default=[player_ips[0]])
+    selected_latencies = st.sidebar.multiselect('Select Latencies', latencies, default=[latencies[0]] if latencies else [])
+    
+    # Filter rounds based on selected latencies
+    filtered_rounds = round_latencies[round_latencies['latency'].isin(selected_latencies)]
+    selected_rounds = st.sidebar.multiselect('Select Rounds', filtered_rounds['round_label'].tolist(), 
+                                             default=[filtered_rounds['round_label'].iloc[0]] if not filtered_rounds.empty else [])
+    
+    selected_players = st.sidebar.multiselect('Select Players', player_ips, default=[player_ips[0]] if player_ips else [])
 
     # Streamlit app
     st.title('Player Input Frequency Visualization')
@@ -127,10 +151,11 @@ if player_performance is not None:
             for attr in selected_attributes:
                 fig = go.Figure()
 
-                for selected_round in selected_rounds:
-                    event_data = load_event_data(selected_round, selected_player)
+                for round_label in selected_rounds:
+                    round_number = int(round_label.split(' - ')[0].split(' ')[1])
+                    event_data = load_event_data(round_number, selected_player)
                     if event_data is None or event_data.empty:
-                        st.info(f"No event data available for Round {selected_round} and Player {selected_player}")
+                        st.info(f"No event data available for {round_label} and Player {selected_player}")
                         continue
 
                     # Convert timestamps for event data
@@ -138,10 +163,10 @@ if player_performance is not None:
 
                     # Filter kill and death data
                     kills_data = event_data[event_data['event'] == 'Kill']
-                    deaths_data = event_data[event_data['event'] == 'Death'] #Note to self that this does not work. Needs deaths events csv to be generated
+                    deaths_data = event_data[event_data['event'] == 'Death']
 
                     if kills_data.empty and deaths_data.empty:
-                        st.info(f"No kill or death events for Round {selected_round} and Player {selected_player}")
+                        st.info(f"No kill or death events for {round_label} and Player {selected_player}")
                         continue
 
                     # Get round start and end times
@@ -153,7 +178,7 @@ if player_performance is not None:
                                                      (mouse_keyboard_data['timestamp'] <= round_end)]
 
                     if round_data.empty:
-                        st.warning(f"No mouse/keyboard data available for the time range of Round {selected_round}")
+                        st.warning(f"No mouse/keyboard data available for the time range of {round_label}")
                         continue
 
                     # Calculate frequency data
@@ -167,7 +192,7 @@ if player_performance is not None:
                         x=freq_data['normalized_time'],
                         y=freq_data[f'{attr}_diff'],
                         mode='lines',
-                        name=f'Round {selected_round}'
+                        name=round_label
                     ))
                     
                     # Function to add events to the plot
@@ -186,7 +211,7 @@ if player_performance is not None:
                             y=event_y_values,
                             mode='markers',
                             marker=dict(symbol=marker_symbol, size=10),
-                            name=f'{event_type}s (Round {selected_round})'
+                            name=f'{event_type}s ({round_label})'
                         ))
 
                     # Add kill events
@@ -206,4 +231,4 @@ if player_performance is not None:
                 st.plotly_chart(fig, use_container_width=True)
 
 else:
-    st.error("Cannot proceed with visualization due to player performance data loading error.")
+    st.error("Cannot proceed with visualization due to empty or invalid player performance data.")
