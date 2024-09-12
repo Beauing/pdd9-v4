@@ -10,7 +10,8 @@ def format_datetime(timestamp):
     time_str = datetime_obj.strftime('%H:%M:%S')
     return date_str, time_str
 
-input_path = 'openarena_20240523_11.35.log'
+#make this uploads - upload latest log file, upload directory of all 4 mouse movements
+input_path = 'openarena_20240905_11.53.log'
 output_path = 'processes/processed_logs/start.log'
 
 # Read the input file

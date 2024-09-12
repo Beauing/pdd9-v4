@@ -5,21 +5,15 @@ import pandas as pd
 input_path = 'final-data/remove_break_rounds.csv'
 output_path = 'final-data/round_summary.csv'
 
-# Mapping of player IDs to IP addresses
-player_ip_map = {
-    1: 'Player_172.19.137.208',
-    2: 'Player_172.19.114.48',
-    3: 'Player_172.19.119.51',
-    4: 'Player_172.19.116.18',
-    5: 'Player_172.19.120.104',
-    6: 'Player_172.19.117.18'
-}
-
 # Read the CSV file
 df = pd.read_csv(input_path)
 
-# Unique player IDs to include in the summary
-player_ids = list(range(1, 7))
+# Get unique player IPs and create a mapping
+unique_player_ips = df['player_ip'].unique()
+player_ip_map = {i+1: ip for i, ip in enumerate(unique_player_ips)}
+
+# Reverse mapping for easy lookup
+ip_player_map = {v: k for k, v in player_ip_map.items()}
 
 # Initialize a list to store the summary data
 summary_data = []
@@ -29,9 +23,9 @@ for game_round, group in df.groupby('game_round'):
     current_map = group['map'].iloc[0] if pd.notna(group['map'].iloc[0]) else ''
     current_latency = group['latency'].iloc[0] if pd.notna(group['latency'].iloc[0]) else ''
     
-    for player_id in player_ids:
-        player_ip = player_ip_map[player_id]
-        player_data = group[group['player_id'] == player_id]
+    for player_ip in unique_player_ips:
+        player_id = ip_player_map[player_ip]
+        player_data = group[group['player_ip'] == player_ip]
         if not player_data.empty:
             last_record = player_data.iloc[-1]
             score = last_record['score'] if pd.notna(last_record['score']) else 0
@@ -54,3 +48,8 @@ summary_df = pd.DataFrame(summary_data)
 summary_df.to_csv(output_path, index=False)
 
 print(f"Round score summary saved to {output_path}")
+
+# Print out the player ID to IP mapping for reference
+print("\nPlayer ID to IP mapping:")
+for player_id, ip in player_ip_map.items():
+    print(f"Player {player_id}: {ip}")
